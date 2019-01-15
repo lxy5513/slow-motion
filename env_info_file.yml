@@ -1,0 +1,60 @@
+name: super_slomo
+channels:
+  - menpo
+  - pytorch
+  - defaults
+dependencies:
+  - blas=1.0=mkl
+  - ca-certificates=2018.03.07=0
+  - certifi=2018.11.29=py37_0
+  - cffi=1.11.5=py37he75722e_1
+  - cudatoolkit=8.0=3
+  - intel-openmp=2019.1=144
+  - libedit=3.1.20170329=h6b74fdf_2
+  - libffi=3.2.1=hd88cf55_4
+  - libgcc-ng=8.2.0=hdf63c60_1
+  - libgfortran-ng=7.3.0=hdf63c60_0
+  - libstdcxx-ng=8.2.0=hdf63c60_1
+  - mkl=2019.1=144
+  - mkl_fft=1.0.10=py37ha843d7b_0
+  - mkl_random=1.0.2=py37hd81dba3_0
+  - ncurses=6.1=he6710b0_1
+  - ninja=1.8.2=py37h6bb024c_1
+  - numpy=1.15.4=py37h7e9f1db_0
+  - numpy-base=1.15.4=py37hde5b4d6_0
+  - openssl=1.1.1a=h7b6447c_0
+  - pip=18.1=py37_0
+  - pycparser=2.19=py37_0
+  - python=3.7.2=h0371630_0
+  - readline=7.0=h7b6447c_5
+  - setuptools=40.6.3=py37_0
+  - sqlite=3.26.0=h7b6447c_0
+  - tk=8.6.8=hbc83047_0
+  - wheel=0.32.3=py37_0
+  - xz=5.2.4=h14c3975_4
+  - zlib=1.2.11=h7b6447c_3
+  - ffmpeg=3.1.3=0
+  - cuda80=1.0=h205658b_0
+  - pytorch=0.4.1=py37_cuda8.0.61_cudnn7.1.2_1
+  - pip:
+    - backcall==0.1.0
+    - decorator==4.3.0
+    - ipdb==0.11
+    - ipython==7.2.0
+    - ipython-genutils==0.2.0
+    - jedi==0.13.2
+    - parso==0.3.1
+    - pexpect==4.6.0
+    - pickleshare==0.7.5
+    - pillow==5.4.1
+    - prompt-toolkit==2.0.7
+    - ptyprocess==0.6.0
+    - pygments==2.3.1
+    - six==1.12.0
+    - torch==0.4.1
+    - torchvision==0.2.1
+    - tqdm==4.29.1
+    - traitlets==4.3.2
+    - wcwidth==0.1.7
+prefix: /home/ferryliu/anaconda3/envs/super_slomo
+

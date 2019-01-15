@@ -114,12 +114,14 @@ def main():
 
     # Initialize transforms
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    print(device)
+    #  import ipdb; ipdb.set_trace()
 
     mean = [0.429, 0.431, 0.397]
     std  = [1, 1, 1]
     normalize = transforms.Normalize(mean=mean,
                                      std=std)
-    
+
     negmean = [x * -1 for x in mean]
     revNormalize = transforms.Normalize(mean=negmean, std=std)
 
@@ -145,7 +147,7 @@ def main():
     ArbTimeFlowIntrp.to(device)
     for param in ArbTimeFlowIntrp.parameters():
         param.requires_grad = False
-    
+
     flowBackWarp = model.backWarp(videoFrames.dim[0], videoFrames.dim[1], device)
     flowBackWarp = flowBackWarp.to(device)
 
@@ -182,17 +184,17 @@ def main():
 
                 g_I0_F_t_0 = flowBackWarp(I0, F_t_0)
                 g_I1_F_t_1 = flowBackWarp(I1, F_t_1)
-                
+
                 intrpOut = ArbTimeFlowIntrp(torch.cat((I0, I1, F_0_1, F_1_0, F_t_1, F_t_0, g_I1_F_t_1, g_I0_F_t_0), dim=1))
-                    
+
                 F_t_0_f = intrpOut[:, :2, :, :] + F_t_0
                 F_t_1_f = intrpOut[:, 2:4, :, :] + F_t_1
                 V_t_0   = F.sigmoid(intrpOut[:, 4:5, :, :])
                 V_t_1   = 1 - V_t_0
-                    
+
                 g_I0_F_t_0_f = flowBackWarp(I0, F_t_0_f)
                 g_I1_F_t_1_f = flowBackWarp(I1, F_t_1_f)
-                
+
                 wCoeff = [1 - t, t]
 
                 Ft_p = (wCoeff[0] * V_t_0 * g_I0_F_t_0_f + wCoeff[1] * V_t_1 * g_I1_F_t_1_f) / (wCoeff[0] * V_t_0 + wCoeff[1] * V_t_1)
@@ -201,7 +203,7 @@ def main():
                 for batchIndex in range(args.batch_size):
                     (TP(Ft_p[batchIndex].cpu().detach())).resize(videoFrames.origDim, Image.BILINEAR).save(os.path.join(outputPath, str(frameCounter + args.sf * batchIndex) + ".jpg"))
                 frameCounter += 1
-            
+
             # Set counter accounting for batching of frames
             frameCounter += args.sf * (args.batch_size - 1)
 
